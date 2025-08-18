@@ -37,7 +37,7 @@ const RecentGameCard: React.FC<{ game: GameResult }> = ({ game }) => {
             ? theme.palette.error.light
             : theme.palette.divider
         }`,
-        borderRadius: 1,
+        borderRadius: 0.5,
         px: 0.7,
         my: 1,
         position: "relative",

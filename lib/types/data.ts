@@ -11,28 +11,28 @@ export interface Player {
 }
 
 export interface PlayerStats {
-  games_played?: string;
-  games_started?: string;
-  minutes?: string;
-  points?: string;
-  rebounds?: string;
-  assists?: string;
-  per?: string;
-  steals?: string;
-  blocks?: string;
-  turnovers?: string;
-  fg2_made?: string;
-  fg2_attempted?: string;
-  fg2_percentage?: string;
-  fg3_made?: string;
-  fg3_attempted?: string;
-  fg3_percentage?: string;
-  ft_made?: string;
-  ft_attempted?: string;
-  ft_percentage?: string;
-  points_per_40?: string;
-  rebounds_per_40?: string;
-  assists_per_40?: string;
+  games_played?: number;
+  games_started?: number;
+  minutes?: number;
+  points?: number;
+  rebounds?: number;
+  assists?: number;
+  per?: number;
+  steals?: number;
+  blocks?: number;
+  turnovers?: number;
+  fg2_made?: number;
+  fg2_attempted?: number;
+  fg2_percentage?: number;
+  fg3_made?: number;
+  fg3_attempted?: number;
+  fg3_percentage?: number;
+  ft_made?: number;
+  ft_attempted?: number;
+  ft_percentage?: number;
+  points_per_40?: number;
+  rebounds_per_40?: number;
+  assists_per_40?: number;
 }
 
 // Team roster data (from team.json - Table 1)

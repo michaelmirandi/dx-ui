@@ -162,31 +162,29 @@ export default function RSCIRankings() {
       >
         RSCI Rankings
       </Typography>
-      <GradientCard gradientType="primary">
-        <DataGrid
-          rows={mockRecruits}
-          columns={columns}
-          rowHeight={30}
-          columnHeaderHeight={25}
-          disableRowSelectionOnClick
-          disableColumnMenu
-          hideFooter
-          sx={{
-            border: "none",
-            "& .MuiDataGrid-cell": {
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "action.hover",
-              fontWeight: 600,
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-row:hover": {
-              backgroundColor: "action.hover",
-            },
-          }}
-        />
-      </GradientCard>
+      <DataGrid
+        rows={mockRecruits}
+        columns={columns}
+        rowHeight={30}
+        columnHeaderHeight={25}
+        disableRowSelectionOnClick
+        disableColumnMenu
+        hideFooter
+        sx={{
+          border: "none",
+          "& .MuiDataGrid-cell": {
+            fontSize: "0.8rem",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "action.hover",
+            fontWeight: 600,
+            fontSize: "0.8rem",
+          },
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: "action.hover",
+          },
+        }}
+      />
     </Box>
   );
 }

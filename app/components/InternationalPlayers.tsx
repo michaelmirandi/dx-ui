@@ -158,7 +158,6 @@ export default function InternationalPlayers() {
       >
         International Players
       </Typography>
-      <GradientCard gradientType="primary">
         <DataGrid
           rows={mockInternationalPlayers}
           columns={columns}
@@ -182,7 +181,6 @@ export default function InternationalPlayers() {
             },
           }}
         />
-      </GradientCard>
     </Box>
   );
 }

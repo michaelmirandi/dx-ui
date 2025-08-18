@@ -165,31 +165,29 @@ export default function TransferPortal() {
       >
         Transfer Portal
       </Typography>
-      <GradientCard gradientType="secondary">
-        <DataGrid
-          rows={mockTransfers}
-          columns={columns}
-          disableRowSelectionOnClick
-          hideFooter
-          disableColumnMenu
-          rowHeight={30}
-          columnHeaderHeight={25}
-          sx={{
-            border: "none",
-            "& .MuiDataGrid-cell": {
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "action.hover",
-              fontWeight: 600,
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-row:hover": {
-              backgroundColor: "action.hover",
-            },
-          }}
-        />
-      </GradientCard>
+      <DataGrid
+        rows={mockTransfers}
+        columns={columns}
+        disableRowSelectionOnClick
+        hideFooter
+        disableColumnMenu
+        rowHeight={30}
+        columnHeaderHeight={25}
+        sx={{
+          border: "none",
+          "& .MuiDataGrid-cell": {
+            fontSize: "0.8rem",
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "action.hover",
+            fontWeight: 600,
+            fontSize: "0.8rem",
+          },
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: "action.hover",
+          },
+        }}
+      />
     </Box>
   );
 }

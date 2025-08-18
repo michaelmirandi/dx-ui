@@ -49,28 +49,28 @@ const parseTeamPlayer = (rawPlayer: Record<string, any>): TeamPlayer => ({
 });
 
 const parsePlayerStats = (rawStats: Record<string, any>): PlayerStats => ({
-  games_played: rawStats.GP || "",
-  games_started: rawStats.GS || "",
-  minutes: rawStats.MIN || "",
-  points: rawStats.PTS || "",
-  rebounds: rawStats.REB || "",
-  assists: rawStats.AST || "",
-  per: rawStats.PER || "",
-  steals: rawStats.STL || "",
-  blocks: rawStats.BLK || "",
-  turnovers: rawStats.TOV || "",
-  fg2_made: rawStats["2PM"] || "",
-  fg2_attempted: rawStats["2PA"] || "",
-  fg2_percentage: rawStats["2P%"] || "",
-  fg3_made: rawStats["3PM"] || "",
-  fg3_attempted: rawStats["3PA"] || "",
-  fg3_percentage: rawStats["3P%"] || "",
-  ft_made: rawStats.FTM || "",
-  ft_attempted: rawStats.FTA || "",
-  ft_percentage: rawStats["FT%"] || "",
-  points_per_40: rawStats.P40 || "",
-  rebounds_per_40: rawStats.R40 || "",
-  assists_per_40: rawStats.A40 || "",
+  games_played: rawStats.GP ? parseFloat(rawStats.GP) : 0,
+  games_started: rawStats.GS ? parseFloat(rawStats.GS) : 0,
+  minutes: rawStats.MIN ? parseFloat(rawStats.MIN) : 0,
+  points: rawStats.PTS ? parseFloat(rawStats.PTS) : 0,
+  rebounds: rawStats.REB ? parseFloat(rawStats.REB) : 0,
+  assists: rawStats.AST ? parseFloat(rawStats.AST) : 0,
+  per: rawStats.PER ? parseFloat(rawStats.PER) : 0,
+  steals: rawStats.STL ? parseFloat(rawStats.STL) : 0,
+  blocks: rawStats.BLK ? parseFloat(rawStats.BLK) : 0,
+  turnovers: rawStats.TOV ? parseFloat(rawStats.TOV) : 0,
+  fg2_made: rawStats["2PM"] ? parseFloat(rawStats["2PM"]) : 0,
+  fg2_attempted: rawStats["2PA"] ? parseFloat(rawStats["2PA"]) : 0,
+  fg2_percentage: rawStats["2P%"] ? parseFloat(rawStats["2P%"]) : 0,
+  fg3_made: rawStats["3PM"] ? parseFloat(rawStats["3PM"]) : 0,
+  fg3_attempted: rawStats["3PA"] ? parseFloat(rawStats["3PA"]) : 0,
+  fg3_percentage: rawStats["3P%"] ? parseFloat(rawStats["3P%"]) : 0,
+  ft_made: rawStats.FTM ? parseFloat(rawStats.FTM) : 0,
+  ft_attempted: rawStats.FTA ? parseFloat(rawStats.FTA) : 0,
+  ft_percentage: rawStats["FT%"] ? parseFloat(rawStats["FT%"]) : 0,
+  points_per_40: rawStats.P40 ? parseFloat(rawStats.P40) : 0,
+  rebounds_per_40: rawStats.R40 ? parseFloat(rawStats.R40) : 0,
+  assists_per_40: rawStats.A40 ? parseFloat(rawStats.A40) : 0,
 });
 
 const parseGameResult = (rawGame: Record<string, any>): GameResult => ({
@@ -206,7 +206,9 @@ export const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
       const scheduleTable = teamData.tables.find((t) => t.table_index === 3);
 
       if (rosterTable && statsTable && scheduleTable) {
-        const roster = rosterTable.data.map(parseTeamPlayer);
+        const roster = rosterTable.data
+          .map(parseTeamPlayer)
+          .sort((a, b) => +b.dxv_rating - +a.dxv_rating);
         const stats = statsTable.data.map((rawStats) => {
           const basePlayer = parseTeamPlayer(rawStats);
           return {
