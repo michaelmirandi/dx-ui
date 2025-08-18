@@ -10,7 +10,7 @@ export default function AppHeader() {
 
   return (
     <AppBar
-      position="fixed"
+      position="static"
       elevation={0}
       sx={{
         backdropFilter: "blur(6px)",

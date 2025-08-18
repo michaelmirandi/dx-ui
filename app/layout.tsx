@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import ThemeRegistry from "@/lib/theme/ThemeRegistry";
-import AppHeader from "@/components/AppHeader";
-import BackgroundGradient from "@/components/BackgroundGradient";
+import DataProvider from "@/lib/data/DataProvider";
+import AppHeader from "@/app/components/AppHeader";
+import BackgroundGradient from "@/app/components/BackgroundGradient";
 import { Toolbar, Container, Box } from "@mui/material";
 import "./globals.css";
 
@@ -25,14 +26,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={montserrat.className}>
         <ThemeRegistry>
-          <BackgroundGradient />
-          <Box sx={{ minHeight: "100vh", position: "relative" }}>
-            <AppHeader />
-            <Toolbar />
-            <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-              {children}
-            </Container>
-          </Box>
+          <DataProvider>
+            <BackgroundGradient />
+            <Box
+              sx={{ display: "flex", flexDirection: "column", height: "100vh" }}
+            >
+              <AppHeader />
+              <Box sx={{ flex: 1, overflow: "hidden", position: "relative" }}>
+                {children}
+              </Box>
+            </Box>
+          </DataProvider>
         </ThemeRegistry>
       </body>
     </html>

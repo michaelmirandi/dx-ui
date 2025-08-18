@@ -19,11 +19,11 @@ export default function BackgroundGradient() {
           zIndex: -1,
           background: theme.palette.mode === 'light'
             ? `radial-gradient(ellipse at top left, 
-                ${alpha(theme.palette.secondary.main, 0.15)} 0%, 
-                ${alpha(theme.palette.secondary.main, 0.08)} 25%, 
-                ${alpha(theme.palette.primary.main, 0.12)} 50%,
-                ${alpha(theme.palette.primary.main, 0.18)} 75%,
-                ${alpha(theme.palette.primary.main, 0.25)} 100%)`
+                ${alpha(theme.palette.secondary.main, 0.06)} 0%, 
+                ${alpha(theme.palette.secondary.main, 0.03)} 25%, 
+                ${alpha(theme.palette.primary.main, 0.05)} 50%,
+                ${alpha(theme.palette.primary.main, 0.08)} 75%,
+                ${alpha(theme.palette.primary.main, 0.10)} 100%)`
             : `linear-gradient(135deg, 
                 ${alpha(theme.palette.primary.main, 0.08)} 0%, 
                 ${alpha(theme.palette.primary.main, 0.03)} 25%, 
@@ -42,11 +42,11 @@ export default function BackgroundGradient() {
           width: '600px',
           height: '600px',
           zIndex: -1,
-          opacity: theme.palette.mode === 'light' ? 0.8 : 0.2,
+          opacity: theme.palette.mode === 'light' ? 0.4 : 0.2,
           background: theme.palette.mode === 'light'
             ? `radial-gradient(circle at center, 
-                ${alpha(theme.palette.secondary.main, 0.25)} 0%, 
-                ${alpha(theme.palette.secondary.main, 0.15)} 40%,
+                ${alpha(theme.palette.secondary.main, 0.12)} 0%, 
+                ${alpha(theme.palette.secondary.main, 0.06)} 40%,
                 transparent 70%)`
             : `radial-gradient(circle at center, 
                 ${alpha(theme.palette.primary.main, 0.15)} 0%, 
@@ -76,11 +76,11 @@ export default function BackgroundGradient() {
           width: '500px',
           height: '500px',
           zIndex: -1,
-          opacity: theme.palette.mode === 'light' ? 0.7 : 0.15,
+          opacity: theme.palette.mode === 'light' ? 0.3 : 0.15,
           background: theme.palette.mode === 'light'
             ? `radial-gradient(circle at center, 
-                ${alpha(theme.palette.primary.main, 0.2)} 0%, 
-                ${alpha(theme.palette.primary.main, 0.1)} 40%,
+                ${alpha(theme.palette.primary.main, 0.10)} 0%, 
+                ${alpha(theme.palette.primary.main, 0.05)} 40%,
                 transparent 70%)`
             : `radial-gradient(circle at center, 
                 ${alpha(theme.palette.secondary.main, 0.12)} 0%, 

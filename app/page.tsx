@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import {
-  Box,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, useTheme, Grid } from "@mui/material";
+import TeamRoster from "./components/TeamRoster";
+import TransferPortal from "./components/TransferPortal";
+import RSCIRankings from "./components/RSCIRankings";
+import InternationalPlayers from "./components/InternationalPlayers";
+import UpcomingGamesBanner from "./components/UpcomingGamesBanner";
 
 export default function Home() {
   const theme = useTheme();
@@ -13,25 +14,78 @@ export default function Home() {
   return (
     <Box
       sx={{
+        width: "100%",
+        height: "100%",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "60vh",
-        textAlign: "center",
+        flexDirection: "column",
+        bgcolor: theme.palette.background.default,
       }}
     >
-      <Typography
-        variant="h4"
-        fontWeight={600}
+      <UpcomingGamesBanner />
+      
+      <Box sx={{ flex: 1, overflow: "hidden" }}>
+        <Grid
+        container
+        spacing={0}
         sx={{
-          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
+          height: "100%",
+          width: "100%",
+          margin: 0,
         }}
       >
-        In Progress
-      </Typography>
+        {/* Column 1: Roster Listing */}
+        <Grid
+          size={{ xs: 12, md: 6, lg: 4 }}
+          sx={{
+            height: { xs: "auto", md: "50%", lg: "100%" },
+            overflow: "auto",
+          }}
+        >
+          <TeamRoster />
+        </Grid>
+
+        {/* Column 2: Transfer Portal */}
+        <Grid
+          size={{ xs: 12, md: 6, lg: 4 }}
+          sx={{
+            height: { xs: "auto", md: "50%", lg: "100%" },
+            overflow: "auto",
+          }}
+        >
+          <TransferPortal />
+        </Grid>
+
+        {/* Column 3: RSCI Rankings and International Players */}
+        <Grid
+          size={{ xs: 12, md: 12, lg: 4 }}
+          sx={{
+            height: { xs: "auto", lg: "100%" },
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* RSCI Rankings - Top Section */}
+          <Box
+            sx={{
+              flex: 1,
+              overflow: "auto",
+            }}
+          >
+            <RSCIRankings />
+          </Box>
+
+          {/* International Players - Bottom Section */}
+          <Box
+            sx={{
+              flex: 1,
+              overflow: "auto",
+            }}
+          >
+            <InternationalPlayers />
+          </Box>
+        </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 }
