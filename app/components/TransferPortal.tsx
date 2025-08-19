@@ -27,7 +27,7 @@ const columns: GridColDef[] = [
     field: "player",
     headerName: "Player",
     flex: 1.75,
-    minWidth: 200,
+    minWidth: 150,
     renderCell: (params: GridRenderCellParams) => {
       const player = params.row;
       return (
@@ -66,6 +66,8 @@ const columns: GridColDef[] = [
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
                 display: "block",
+                fontWeight: 500,
+                width: "100%",
               }}
             >
               {player.class} • {player.position} • {player.height} •{" "}
@@ -214,7 +216,10 @@ const columns: GridColDef[] = [
             label={getStatusLabel()}
             size="small"
             color={getStatusColor()}
-            sx={{ fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.65rem" }, fontWeight: 600 }}
+            sx={{
+              fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.65rem" },
+              fontWeight: 600,
+            }}
           />
           {statusLower.includes("committed") && (
             <ShieldIcon
@@ -330,9 +335,10 @@ export default function TransferPortal() {
       }}
     >
       <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        justifyContent={{ xs: "flex-start", sm: "space-between" }}
+        spacing={{ xs: 1, sm: 0 }}
         sx={{
           mb: 2,
           pb: 1,
@@ -359,18 +365,18 @@ export default function TransferPortal() {
           size="small"
           sx={{
             "& .MuiToggleButton-root": {
-              fontSize: "0.7rem",
-              py: 0.05,
-              px: 1.5,
+              fontSize: { xs: "0.65rem", sm: "0.7rem" },
+              py: { xs: 0.25, sm: 0.05 },
+              px: { xs: 1, sm: 1.5 },
             },
           }}
         >
           <ToggleButton value="available">
-            <SwapHorizIcon sx={{ fontSize: 12, mr: 0.5 }} />
+            <SwapHorizIcon sx={{ fontSize: { xs: 11, sm: 12 }, mr: 0.5 }} />
             Available ({availablePlayers.length})
           </ToggleButton>
           <ToggleButton value="committed">
-            <CheckCircleIcon sx={{ fontSize: 12, mr: 0.5 }} />
+            <CheckCircleIcon sx={{ fontSize: { xs: 11, sm: 12 }, mr: 0.5 }} />
             Committed ({committedPlayers.length})
           </ToggleButton>
         </ToggleButtonGroup>

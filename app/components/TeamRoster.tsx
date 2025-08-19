@@ -49,6 +49,8 @@ const columns: GridColDef[] = [
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
                 display: "block",
+                fontWeight: 500,
+                width: "100%",
               }}
             >
               #{player.jersey_number} • {player.class} • {player.position} •{" "}
