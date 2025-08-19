@@ -27,7 +27,7 @@ const columns: GridColDef[] = [
               variant="body2"
               sx={{
                 fontWeight: 600,
-                fontSize: "0.7rem",
+                fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
                 lineHeight: 1.2,
                 mt: -0.6,
                 overflow: "hidden",
@@ -43,7 +43,7 @@ const columns: GridColDef[] = [
               sx={{
                 color: "text.secondary",
                 lineHeight: 1.1,
-                fontSize: "0.6rem",
+                fontSize: { xs: "0.5rem", sm: "0.55rem", md: "0.6rem" },
                 mt: 0.5,
                 overflow: "hidden",
                 textOverflow: "ellipsis",
@@ -208,12 +208,12 @@ export default function TeamRoster() {
           flex: 1,
           minHeight: 0,
           "& .MuiDataGrid-cell": {
-            fontSize: "0.7rem",
+            fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
           },
           "& .MuiDataGrid-columnHeaders": {
             backgroundColor: "action.hover",
             fontWeight: 600,
-            fontSize: "0.7rem",
+            fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
           },
           "& .MuiDataGrid-row:hover": {
             backgroundColor: "action.hover",

@@ -29,10 +29,20 @@ export default function RootLayout({
           <DataProvider>
             <BackgroundGradient />
             <Box
-              sx={{ display: "flex", flexDirection: "column", height: "100vh" }}
+              sx={{ 
+                display: "flex", 
+                flexDirection: "column", 
+                height: "100vh",
+                overflow: { xs: "auto", lg: "hidden" },
+              }}
             >
               <AppHeader />
-              <Box sx={{ flex: 1, overflow: "hidden", position: "relative" }}>
+              <Box sx={{ 
+                flex: 1, 
+                overflow: { xs: "visible", lg: "hidden" }, 
+                position: "relative",
+                minHeight: 0,
+              }}>
                 {children}
               </Box>
             </Box>

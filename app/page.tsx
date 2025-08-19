@@ -15,7 +15,8 @@ export default function Home() {
     <Box
       sx={{
         width: "100%",
-        height: "100%",
+        height: { xs: "auto", lg: "100%" },
+        minHeight: { xs: "100vh", lg: "100%" },
         display: "flex",
         flexDirection: "column",
         bgcolor: theme.palette.background.default,
@@ -23,12 +24,16 @@ export default function Home() {
     >
       <UpcomingGamesBanner />
       
-      <Box sx={{ flex: 1, overflow: "hidden" }}>
+      <Box sx={{ 
+        flex: 1, 
+        overflow: { xs: "auto", lg: "hidden" },
+        WebkitOverflowScrolling: "touch", // Smooth scrolling on iOS
+      }}>
         <Grid
         container
         spacing={0}
         sx={{
-          height: "100%",
+          height: { xs: "auto", lg: "100%" },
           width: "100%",
           margin: 0,
         }}
@@ -37,8 +42,9 @@ export default function Home() {
         <Grid
           size={{ xs: 12, md: 6, lg: 4 }}
           sx={{
-            height: { xs: "auto", md: "50%", lg: "100%" },
-            overflow: "auto",
+            height: { xs: "auto", md: "50vh", lg: "100%" },
+            minHeight: { xs: "400px", md: "auto" },
+            overflow: { xs: "visible", md: "auto" },
           }}
         >
           <TeamRoster />
@@ -48,8 +54,9 @@ export default function Home() {
         <Grid
           size={{ xs: 12, md: 6, lg: 4 }}
           sx={{
-            height: { xs: "auto", md: "50%", lg: "100%" },
-            overflow: "auto",
+            height: { xs: "auto", md: "50vh", lg: "100%" },
+            minHeight: { xs: "400px", md: "auto" },
+            overflow: { xs: "visible", md: "auto" },
           }}
         >
           <TransferPortal />
@@ -67,8 +74,9 @@ export default function Home() {
           {/* RSCI Rankings - Top Section */}
           <Box
             sx={{
-              flex: 1,
-              overflow: "auto",
+              flex: { xs: "none", lg: 1 },
+              minHeight: { xs: "400px", lg: "auto" },
+              overflow: { xs: "visible", lg: "auto" },
             }}
           >
             <RSCIRankings />
@@ -77,8 +85,9 @@ export default function Home() {
           {/* International Players - Bottom Section */}
           <Box
             sx={{
-              flex: 1,
-              overflow: "auto",
+              flex: { xs: "none", lg: 1 },
+              minHeight: { xs: "400px", lg: "auto" },
+              overflow: { xs: "visible", lg: "auto" },
             }}
           >
             <InternationalPlayers />
