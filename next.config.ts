@@ -1,7 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.draftexpress.com',
+        port: '',
+        pathname: '/blue/graphics/logos/teams/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

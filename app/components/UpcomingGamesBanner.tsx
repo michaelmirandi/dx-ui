@@ -176,7 +176,7 @@ const UpcomingGamesBanner: React.FC = () => {
     );
   }
 
-  const recentGames = team.schedule.slice(-12).reverse();
+  const recentGames = team.schedule.slice(-12);
 
   if (recentGames.length === 0) {
     return (

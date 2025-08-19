@@ -4,6 +4,7 @@ import { Box, Typography, useTheme, Avatar } from "@mui/material";
 import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import { useData } from "@/lib/data/DataProvider";
 import Person2Icon from "@mui/icons-material/Person2";
+import DxvPercentile from "./DxvPercentile";
 
 const columns: GridColDef[] = [
   {
@@ -64,6 +65,14 @@ const columns: GridColDef[] = [
     width: 50,
     align: "center",
     headerAlign: "center",
+    renderCell: (params: GridRenderCellParams) => {
+      const dxvRating = parseFloat(params.value) || 0;
+      // Convert DXV rating to percentile (assuming DXV ranges from 0-100)
+      // You may need to adjust this based on your actual DXV scale
+      const percentile = dxvRating / 100;
+
+      return <DxvPercentile percentile={percentile} />;
+    },
   },
   {
     field: "minutes",
@@ -208,6 +217,12 @@ export default function TeamRoster() {
           },
           "& .MuiDataGrid-row:hover": {
             backgroundColor: "action.hover",
+          },
+          "& .MuiDataGrid-cell[data-field='dxv_rating']": {
+            padding: 0,
+          },
+          "& .MuiDataGrid-columnHeader[data-field='dxv_rating']": {
+            padding: 0,
           },
         }}
       />

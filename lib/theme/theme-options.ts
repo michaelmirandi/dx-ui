@@ -160,10 +160,22 @@ export const getThemeOptions = (mode: PaletteMode): ThemeOptions => ({
       styleOverrides: {
         root: {
           border: "none",
-          borderRadius: 2,
+          borderRadius: 9,
           overflow: "hidden",
           position: "relative",
           padding: "8px",
+          "& ::-webkit-scrollbar": {
+            width: "8px",
+            height: "8px",
+          },
+          "& ::-webkit-scrollbar-track": {
+            background: mode === "dark" ? themeConfig.secondary : "#f0f0f0",
+            borderRadius: "4px",
+          },
+          "& ::-webkit-scrollbar-thumb": {
+            backgroundColor: themeConfig.primary,
+            borderRadius: "4px",
+          },
           background:
             mode === "light"
               ? `linear-gradient(135deg, 
@@ -183,10 +195,10 @@ export const getThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           "&::before": {
             content: '""',
             position: "absolute",
-            top: -1,
-            left: -1,
-            right: -1,
-            bottom: -1,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             background: "linear-gradient(135deg, #54261A, #FDB726)",
             borderRadius: "9px",
             zIndex: -1,
@@ -194,40 +206,32 @@ export const getThemeOptions = (mode: PaletteMode): ThemeOptions => ({
           },
         },
         main: {
-          borderRadius: 2,
-          border: mode === "light" 
-            ? "1px solid rgba(0, 0, 0, 0.12)" 
-            : "1px solid rgba(255, 255, 255, 0.12)",
+          borderRadius: 9,
+          border:
+            mode === "light"
+              ? "1px solid rgba(0, 0, 0, 0.12)"
+              : "1px solid rgba(255, 255, 255, 0.12)",
           overflow: "hidden",
         },
         row: {
           transition: "all 0.2s ease-in-out",
           "&:nth-of-type(even)": {
-            backgroundColor:
-              mode === "light"
-                ? "#f8f9fa"
-                : "#2d2d2d",
-            boxShadow: 
+            backgroundColor: mode === "light" ? "#f8f9fa" : "#2d2d2d",
+            boxShadow:
               mode === "light"
                 ? "inset 0 1px 0 rgba(255, 255, 255, 0.8)"
                 : "inset 0 1px 0 rgba(255, 255, 255, 0.1)",
           },
           "&:nth-of-type(odd)": {
-            backgroundColor:
-              mode === "light"
-                ? "#ffffff"
-                : "#1a1a1a",
-            boxShadow: 
+            backgroundColor: mode === "light" ? "#ffffff" : "#1a1a1a",
+            boxShadow:
               mode === "light"
                 ? "inset 0 1px 0 rgba(255, 255, 255, 0.4)"
                 : "inset 0 1px 0 rgba(255, 255, 255, 0.05)",
           },
           "&:hover": {
-            backgroundColor:
-              mode === "light"
-                ? "#e9ecef"
-                : "#404040",
-            boxShadow: 
+            backgroundColor: mode === "light" ? "#e9ecef" : "#404040",
+            boxShadow:
               mode === "light"
                 ? "inset 0 1px 0 rgba(255, 255, 255, 1), 0 2px 8px rgba(0, 0, 0, 0.15)"
                 : "inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 2px 8px rgba(0, 0, 0, 0.5)",
