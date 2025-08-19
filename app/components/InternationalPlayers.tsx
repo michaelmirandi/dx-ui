@@ -1,137 +1,174 @@
 "use client";
 
-import { Box, Typography, useTheme } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import GradientCard from "./GradientCard";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  useTheme,
+  Chip,
+  ToggleButton,
+  ToggleButtonGroup,
+  Stack,
+} from "@mui/material";
+import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
+import { useData } from "@/lib/data/DataProvider";
+import Person2Icon from "@mui/icons-material/Person2";
 
-interface InternationalPlayer {
-  id: number;
-  name: string;
-  country: string;
-  position: string;
-  height: string;
-  age: number;
-  previousTeam: string;
-  status: string;
-}
-
-const mockInternationalPlayers: InternationalPlayer[] = [
-  {
-    id: 1,
-    name: "Luka Petrovic",
-    country: "Serbia",
-    position: "C",
-    height: "7'0\"",
-    age: 19,
-    previousTeam: "Partizan Belgrade",
-    status: "Enrolled",
-  },
-  {
-    id: 2,
-    name: "Carlos Rodriguez",
-    country: "Spain",
-    position: "PG",
-    height: "6'1\"",
-    age: 20,
-    previousTeam: "Real Madrid B",
-    status: "Committed",
-  },
-  {
-    id: 3,
-    name: "Yuki Tanaka",
-    country: "Japan",
-    position: "SG",
-    height: "6'4\"",
-    age: 18,
-    previousTeam: "Alvark Tokyo U18",
-    status: "Enrolled",
-  },
-  {
-    id: 4,
-    name: "Emmanuel Okoro",
-    country: "Nigeria",
-    position: "PF",
-    height: "6'9\"",
-    age: 19,
-    previousTeam: "NBA Academy Africa",
-    status: "Visiting",
-  },
-  {
-    id: 5,
-    name: "Alexandre Dubois",
-    country: "France",
-    position: "SF",
-    height: "6'7\"",
-    age: 21,
-    previousTeam: "ASVEL Lyon",
-    status: "Offered",
-  },
-];
+type ClassFilter = "2025" | "2026" | "2027";
 
 const columns: GridColDef[] = [
   {
-    field: "name",
-    headerName: "Name",
-    flex: 1.5,
-    minWidth: 130,
+    field: "player",
+    headerName: "Player",
+    flex: 1.75,
+    minWidth: 180,
+    renderCell: (params: GridRenderCellParams) => {
+      const player = params.row;
+      return (
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={1}
+          sx={{ width: "100%", overflow: "hidden", ml: -1 }}
+        >
+          <Person2Icon sx={{ fontSize: 40, flexShrink: 0 }} />
+          <Box sx={{ minWidth: 0, flex: 1, width: "100%" }}>
+            <Typography
+              variant="body2"
+              sx={{
+                fontWeight: 600,
+                fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
+                lineHeight: 1.2,
+                mt: -0.6,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                textDecoration: "underline",
+                cursor: player.url ? "pointer" : "default",
+              }}
+            >
+              {player.name}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{
+                color: "text.secondary",
+                lineHeight: 1.1,
+                fontSize: { xs: "0.5rem", sm: "0.55rem", md: "0.6rem" },
+                mt: 0.5,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                display: "block",
+                fontWeight: 500,
+                width: "100%",
+              }}
+            >
+              {player.position} • {player.height} • {player.weight}lb •{" "}
+              {player.age}y
+            </Typography>
+          </Box>
+        </Box>
+      );
+    },
   },
   {
-    field: "country",
-    headerName: "Country",
-    width: 90,
+    field: "nationality",
+    headerName: "Nationality",
+    flex: 1,
+    minWidth: 90,
+    renderCell: (params: GridRenderCellParams) => {
+      const player = params.row;
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            height: "100%",
+            fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
+            fontWeight: 500,
+          }}
+        >
+          {player.nationality}
+        </Box>
+      );
+    },
+  },
+  {
+    field: "ncaa_level",
+    headerName: "NCAA",
+    width: 80,
+    align: "center",
+    headerAlign: "center",
+    flex: 0.95,
     renderCell: ({ value }) => (
-      <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
-        <Typography sx={{ fontSize: "1.2rem" }}>
-          {value === "Serbia" && "🇷🇸"}
-          {value === "Spain" && "🇪🇸"}
-          {value === "Japan" && "🇯🇵"}
-          {value === "Nigeria" && "🇳🇬"}
-          {value === "France" && "🇫🇷"}
-        </Typography>
-        <Typography sx={{ fontSize: "0.75rem" }}>{value}</Typography>
-      </Box>
+      <Chip
+        label={value || "N/A"}
+        size="small"
+        sx={{
+          fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.65rem" },
+          fontWeight: 600,
+          minWidth: 35,
+        }}
+      />
     ),
   },
+  // {
+  //   field: "english_level",
+  //   headerName: "English",
+  //   width: 70,
+  //   align: "center",
+  //   headerAlign: "center",
+  //   renderCell: ({ value }) => {
+  //     const getColor = () => {
+  //       const level = value?.toUpperCase();
+  //       if (level === "FLUENT" || level === "NATIVE") return "success";
+  //       if (level === "ADVANCED") return "info";
+  //       if (level === "INTERMEDIATE") return "warning";
+  //       if (level === "BASIC") return "error";
+  //       return "default";
+  //     };
+
+  //     return (
+  //       <Chip
+  //         label={value || "N/A"}
+  //         size="small"
+  //         color={getColor()}
+  //         sx={{
+  //           fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.65rem" },
+  //           fontWeight: 500,
+  //         }}
+  //       />
+  //     );
+  //   },
+  // },
   {
-    field: "position",
-    headerName: "Pos",
-    width: 50,
+    field: "ncaa_interest",
+    headerName: "Interest",
+    width: 80,
     align: "center",
     headerAlign: "center",
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    width: 50,
-    align: "center",
-    headerAlign: "center",
-  },
-  {
-    field: "previousTeam",
-    headerName: "Previous Team",
-    flex: 1,
-    minWidth: 120,
-  },
-  {
-    field: "status",
-    headerName: "Status",
-    width: 90,
-    align: "center",
-    headerAlign: "center",
+    flex: 0.8,
+
     renderCell: ({ value }) => {
       const getColor = () => {
-        if (value === "Enrolled") return "success.main";
-        if (value === "Committed") return "primary.main";
-        if (value === "Visiting") return "warning.main";
-        if (value === "Offered") return "info.main";
-        return "text.secondary";
+        const interest = value?.toUpperCase();
+        if (interest === "HIGH" || interest === "VERY HIGH") return "success";
+        if (interest === "MEDIUM") return "warning";
+        if (interest === "LOW") return "error";
+        return "default";
       };
+
       return (
-        <Typography
-          sx={{ color: getColor(), fontSize: "0.75rem", fontWeight: 500 }}
-        >
-          {value}
-        </Typography>
+        <Chip
+          label={value || "N/A"}
+          size="small"
+          color={getColor()}
+          sx={{
+            fontSize: { xs: "0.55rem", sm: "0.6rem", md: "0.65rem" },
+            fontWeight: 500,
+          }}
+        />
       );
     },
   },
@@ -139,48 +176,161 @@ const columns: GridColDef[] = [
 
 export default function InternationalPlayers() {
   const theme = useTheme();
+  const { international, loading, error } = useData();
+  const [classFilter, setClassFilter] = useState<ClassFilter>("2025");
+
+  if (loading) {
+    return (
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 2,
+        }}
+      >
+        <Typography variant="body2" color="text.secondary">
+          Loading international players...
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (error || !international) {
+    return (
+      <Box
+        sx={{
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 2,
+        }}
+      >
+        <Typography variant="body2" color="error">
+          Unable to load international players data
+        </Typography>
+      </Box>
+    );
+  }
+
+  // Transform international players data for DataGrid
+  const allPlayers = international.map((player, index) => ({
+    id: player.player_id || index,
+    name: player.name,
+    nationality: player.nationality,
+    class: player.class,
+    position: player.position,
+    height: player.height,
+    weight: player.weight,
+    age: player.age,
+    high_school: player.high_school,
+    hs_state: player.hs_state,
+    ncaa_level: player.ncaa_level,
+    ncaa_interest: player.ncaa_interest,
+    english_level: player.english_level,
+    video_clips: player.video_clips,
+    url: player.url,
+  }));
+
+  // Filter players by class
+  const gridRows = allPlayers.filter((player) => player.class === classFilter);
+
+  // Get unique classes for toggle buttons
+  const availableClasses = [
+    ...new Set(allPlayers.map((player) => player.class)),
+  ].sort();
+
+  const handleClassFilterChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newFilter: ClassFilter | null
+  ) => {
+    if (newFilter !== null) {
+      setClassFilter(newFilter);
+    }
+  };
 
   return (
     <Box
-      sx={{ height: "100%", display: "flex", flexDirection: "column", p: 2 }}
+      sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        p: 1,
+        overflow: "hidden",
+      }}
     >
-      <Typography
-        variant="h6"
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        justifyContent={{ xs: "flex-start", sm: "space-between" }}
+        spacing={{ xs: 1, sm: 0 }}
         sx={{
-          fontWeight: 600,
           mb: 2,
           pb: 1,
           background: `linear-gradient(90deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.main}4D 100%)`,
           backgroundSize: "100% 1px",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "bottom",
+          flexShrink: 0,
         }}
       >
-        International Players
-      </Typography>
-        <DataGrid
-          rows={mockInternationalPlayers}
-          columns={columns}
-          rowHeight={30}
-          columnHeaderHeight={25}
-          disableRowSelectionOnClick
-          disableColumnMenu
-          hideFooter
+        <Typography
+          variant="h6"
           sx={{
-            border: "none",
-            "& .MuiDataGrid-cell": {
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-columnHeaders": {
-              backgroundColor: "action.hover",
-              fontWeight: 600,
-              fontSize: "0.8rem",
-            },
-            "& .MuiDataGrid-row:hover": {
-              backgroundColor: "action.hover",
+            fontWeight: 600,
+          }}
+        >
+          International Players ({gridRows.length})
+        </Typography>
+
+        <ToggleButtonGroup
+          value={classFilter}
+          exclusive
+          onChange={handleClassFilterChange}
+          size="small"
+          sx={{
+            "& .MuiToggleButton-root": {
+              fontSize: { xs: "0.65rem", sm: "0.7rem" },
+              py: { xs: 0.25, sm: 0.05 },
+              px: { xs: 0.75, sm: 1 },
+              minWidth: { xs: "35px", sm: "40px" },
             },
           }}
-        />
+        >
+          {availableClasses.map((classYear) => (
+            <ToggleButton key={classYear} value={classYear}>
+              '{classYear.slice(-2)}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      </Stack>
+
+      <DataGrid
+        rows={gridRows}
+        columns={columns}
+        rowHeight={35}
+        columnHeaderHeight={25}
+        disableRowSelectionOnClick
+        disableColumnMenu
+        hideFooter
+        sx={{
+          flex: 1,
+          minHeight: 0,
+          "& .MuiDataGrid-cell": {
+            fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
+          },
+          "& .MuiDataGrid-columnHeaders": {
+            backgroundColor: "action.hover",
+            fontWeight: 600,
+            fontSize: { xs: "0.6rem", sm: "0.65rem", md: "0.7rem" },
+          },
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: "action.hover",
+          },
+        }}
+      />
     </Box>
   );
 }

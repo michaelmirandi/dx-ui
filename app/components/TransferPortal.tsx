@@ -330,7 +330,7 @@ export default function TransferPortal() {
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        p: 2,
+        p: 1,
         overflow: "hidden",
       }}
     >
